@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.nlzh.core.mapper.SysLeftmemoMapper" >
+  <resultMap id="BaseResultMap" type="com.nlzh.core.pojo.SysLeftmemo" >
+    <id column="sys_leftmemo_id" property="sysLeftmemoId" jdbcType="BIGINT" />
+    <result column="sys_memo_id" property="sysMemoId" jdbcType="BIGINT" />
+    <result column="sys_leftmemo_parentid" property="sysLeftmemoParentid" jdbcType="BIGINT" />
+    <result column="sys_leftmemo_name" property="sysLeftmemoName" jdbcType="VARCHAR" />
+    <result column="sys_leftmemo_anothername" property="sysLeftmemoAnothername" jdbcType="VARCHAR" />
+    <result column="sys_leftmemo_url" property="sysLeftmemoUrl" jdbcType="VARCHAR" />
+    <result column="gmt_create" property="gmtCreate" jdbcType="TIMESTAMP" />
+    <result column="gmt_modified" property="gmtModified" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    sys_leftmemo_id, sys_memo_id, sys_leftmemo_parentid, sys_leftmemo_name, sys_leftmemo_anothername, 
+    sys_leftmemo_url, gmt_create, gmt_modified
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from sys_leftmemo
+    where sys_leftmemo_id = #{sysLeftmemoId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from sys_leftmemo
+    where sys_leftmemo_id = #{sysLeftmemoId,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.nlzh.core.pojo.SysLeftmemo" >
+    insert into sys_leftmemo (sys_leftmemo_id, sys_memo_id, sys_leftmemo_parentid, 
+      sys_leftmemo_name, sys_leftmemo_anothername, 
+      sys_leftmemo_url, gmt_create, gmt_modified
+      )
+    values (#{sysLeftmemoId,jdbcType=BIGINT}, #{sysMemoId,jdbcType=BIGINT}, #{sysLeftmemoParentid,jdbcType=BIGINT}, 
+      #{sysLeftmemoName,jdbcType=VARCHAR}, #{sysLeftmemoAnothername,jdbcType=VARCHAR}, 
+      #{sysLeftmemoUrl,jdbcType=VARCHAR}, #{gmtCreate,jdbcType=TIMESTAMP}, #{gmtModified,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.nlzh.core.pojo.SysLeftmemo" >
+    insert into sys_leftmemo
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="sysLeftmemoId != null" >
+        sys_leftmemo_id,
+      </if>
+      <if test="sysMemoId != null" >
+        sys_memo_id,
+      </if>
+      <if test="sysLeftmemoParentid != null" >
+        sys_leftmemo_parentid,
+      </if>
+      <if test="sysLeftmemoName != null" >
+        sys_leftmemo_name,
+      </if>
+      <if test="sysLeftmemoAnothername != null" >
+        sys_leftmemo_anothername,
+      </if>
+      <if test="sysLeftmemoUrl != null" >
+        sys_leftmemo_url,
+      </if>
+      <if test="gmtCreate != null" >
+        gmt_create,
+      </if>
+      <if test="gmtModified != null" >
+        gmt_modified,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="sysLeftmemoId != null" >
+        #{sysLeftmemoId,jdbcType=BIGINT},
+      </if>
+      <if test="sysMemoId != null" >
+        #{sysMemoId,jdbcType=BIGINT},
+      </if>
+      <if test="sysLeftmemoParentid != null" >
+        #{sysLeftmemoParentid,jdbcType=BIGINT},
+      </if>
+      <if test="sysLeftmemoName != null" >
+        #{sysLeftmemoName,jdbcType=VARCHAR},
+      </if>
+      <if test="sysLeftmemoAnothername != null" >
+        #{sysLeftmemoAnothername,jdbcType=VARCHAR},
+      </if>
+      <if test="sysLeftmemoUrl != null" >
+        #{sysLeftmemoUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="gmtCreate != null" >
+        #{gmtCreate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="gmtModified != null" >
+        #{gmtModified,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.nlzh.core.pojo.SysLeftmemo" >
+    update sys_leftmemo
+    <set >
+      <if test="sysMemoId != null" >
+        sys_memo_id = #{sysMemoId,jdbcType=BIGINT},
+      </if>
+      <if test="sysLeftmemoParentid != null" >
+        sys_leftmemo_parentid = #{sysLeftmemoParentid,jdbcType=BIGINT},
+      </if>
+      <if test="sysLeftmemoName != null" >
+        sys_leftmemo_name = #{sysLeftmemoName,jdbcType=VARCHAR},
+      </if>
+      <if test="sysLeftmemoAnothername != null" >
+        sys_leftmemo_anothername = #{sysLeftmemoAnothername,jdbcType=VARCHAR},
+      </if>
+      <if test="sysLeftmemoUrl != null" >
+        sys_leftmemo_url = #{sysLeftmemoUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="gmtCreate != null" >
+        gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="gmtModified != null" >
+        gmt_modified = #{gmtModified,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where sys_leftmemo_id = #{sysLeftmemoId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.nlzh.core.pojo.SysLeftmemo" >
+    update sys_leftmemo
+    set sys_memo_id = #{sysMemoId,jdbcType=BIGINT},
+      sys_leftmemo_parentid = #{sysLeftmemoParentid,jdbcType=BIGINT},
+      sys_leftmemo_name = #{sysLeftmemoName,jdbcType=VARCHAR},
+      sys_leftmemo_anothername = #{sysLeftmemoAnothername,jdbcType=VARCHAR},
+      sys_leftmemo_url = #{sysLeftmemoUrl,jdbcType=VARCHAR},
+      gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
+      gmt_modified = #{gmtModified,jdbcType=TIMESTAMP}
+    where sys_leftmemo_id = #{sysLeftmemoId,jdbcType=BIGINT}
+  </update>
+</mapper>

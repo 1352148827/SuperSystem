@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.nlzh.architecture.mapper.ArchitectureTextMapper" >
+  <resultMap id="BaseResultMap" type="com.nlzh.architecture.pojo.ArchitectureText" >
+    <id column="architecture_text_id" property="architectureTextId" jdbcType="BIGINT" />
+    <result column="gmt_create" property="gmtCreate" jdbcType="TIMESTAMP" />
+    <result column="gmt_modified" property="gmtModified" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.nlzh.architecture.pojo.ArchitectureText" extends="BaseResultMap" >
+    <result column="architecture_text_content" property="architectureTextContent" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    architecture_text_id, gmt_create, gmt_modified
+  </sql>
+  <sql id="Blob_Column_List" >
+    architecture_text_content
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from architecture_text
+    where architecture_text_id = #{architectureTextId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from architecture_text
+    where architecture_text_id = #{architectureTextId,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.nlzh.architecture.pojo.ArchitectureText" >
+    insert into architecture_text (architecture_text_id, gmt_create, gmt_modified, 
+      architecture_text_content)
+    values (#{architectureTextId,jdbcType=BIGINT}, #{gmtCreate,jdbcType=TIMESTAMP}, #{gmtModified,jdbcType=TIMESTAMP}, 
+      #{architectureTextContent,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.nlzh.architecture.pojo.ArchitectureText" >
+    insert into architecture_text
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="architectureTextId != null" >
+        architecture_text_id,
+      </if>
+      <if test="gmtCreate != null" >
+        gmt_create,
+      </if>
+      <if test="gmtModified != null" >
+        gmt_modified,
+      </if>
+      <if test="architectureTextContent != null" >
+        architecture_text_content,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="architectureTextId != null" >
+        #{architectureTextId,jdbcType=BIGINT},
+      </if>
+      <if test="gmtCreate != null" >
+        #{gmtCreate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="gmtModified != null" >
+        #{gmtModified,jdbcType=TIMESTAMP},
+      </if>
+      <if test="architectureTextContent != null" >
+        #{architectureTextContent,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.nlzh.architecture.pojo.ArchitectureText" >
+    update architecture_text
+    <set >
+      <if test="gmtCreate != null" >
+        gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="gmtModified != null" >
+        gmt_modified = #{gmtModified,jdbcType=TIMESTAMP},
+      </if>
+      <if test="architectureTextContent != null" >
+        architecture_text_content = #{architectureTextContent,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where architecture_text_id = #{architectureTextId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.nlzh.architecture.pojo.ArchitectureText" >
+    update architecture_text
+    set gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
+      gmt_modified = #{gmtModified,jdbcType=TIMESTAMP},
+      architecture_text_content = #{architectureTextContent,jdbcType=LONGVARCHAR}
+    where architecture_text_id = #{architectureTextId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.nlzh.architecture.pojo.ArchitectureText" >
+    update architecture_text
+    set gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
+      gmt_modified = #{gmtModified,jdbcType=TIMESTAMP}
+    where architecture_text_id = #{architectureTextId,jdbcType=BIGINT}
+  </update>
+</mapper>

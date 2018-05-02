@@ -1,0 +1,222 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.nlzh.core.mapper.SysMemoMapper" >
+  <resultMap id="BaseResultMap" type="com.nlzh.core.pojo.SysMemo" >
+    <id column="sys_memo_id" property="sysMemoId" jdbcType="BIGINT" />
+    <result column="sys_template_id" property="sysTemplateId" jdbcType="BIGINT" />
+    <result column="sys_memo_name" property="sysMemoName" jdbcType="VARCHAR" />
+    <result column="sys_memo_anothername" property="sysMemoAnothername" jdbcType="VARCHAR" />
+    <result column="sys_memo_url" property="sysMemoUrl" jdbcType="VARCHAR" />
+    <result column="sys_memo_remark" property="sysMemoRemark" jdbcType="VARCHAR" />
+    <result column="gmt_create" property="gmtCreate" jdbcType="TIMESTAMP" />
+    <result column="gmt_modified" property="gmtModified" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    sys_memo_id, sys_template_id, sys_memo_name, sys_memo_anothername, sys_memo_url, 
+    sys_memo_remark, gmt_create, gmt_modified
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from sys_memo
+    where sys_memo_id = #{sysMemoId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from sys_memo
+    where sys_memo_id = #{sysMemoId,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.nlzh.core.pojo.SysMemo" >
+    insert into sys_memo (sys_memo_id, sys_template_id, sys_memo_name, 
+      sys_memo_anothername, sys_memo_url, sys_memo_remark, 
+      gmt_create, gmt_modified)
+    values (#{sysMemoId,jdbcType=BIGINT}, #{sysTemplateId,jdbcType=BIGINT}, #{sysMemoName,jdbcType=VARCHAR}, 
+      #{sysMemoAnothername,jdbcType=VARCHAR}, #{sysMemoUrl,jdbcType=VARCHAR}, #{sysMemoRemark,jdbcType=VARCHAR}, 
+      #{gmtCreate,jdbcType=TIMESTAMP}, #{gmtModified,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.nlzh.core.pojo.SysMemo" >
+    insert into sys_memo
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="sysMemoId != null" >
+        sys_memo_id,
+      </if>
+      <if test="sysTemplateId != null" >
+        sys_template_id,
+      </if>
+      <if test="sysMemoName != null" >
+        sys_memo_name,
+      </if>
+      <if test="sysMemoAnothername != null" >
+        sys_memo_anothername,
+      </if>
+      <if test="sysMemoUrl != null" >
+        sys_memo_url,
+      </if>
+      <if test="sysMemoRemark != null" >
+        sys_memo_remark,
+      </if>
+      <if test="gmtCreate != null" >
+        gmt_create,
+      </if>
+      <if test="gmtModified != null" >
+        gmt_modified,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="sysMemoId != null" >
+        #{sysMemoId,jdbcType=BIGINT},
+      </if>
+      <if test="sysTemplateId != null" >
+        #{sysTemplateId,jdbcType=BIGINT},
+      </if>
+      <if test="sysMemoName != null" >
+        #{sysMemoName,jdbcType=VARCHAR},
+      </if>
+      <if test="sysMemoAnothername != null" >
+        #{sysMemoAnothername,jdbcType=VARCHAR},
+      </if>
+      <if test="sysMemoUrl != null" >
+        #{sysMemoUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="sysMemoRemark != null" >
+        #{sysMemoRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="gmtCreate != null" >
+        #{gmtCreate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="gmtModified != null" >
+        #{gmtModified,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.nlzh.core.pojo.SysMemo" >
+    update sys_memo
+    <set >
+      <if test="sysTemplateId != null" >
+        sys_template_id = #{sysTemplateId,jdbcType=BIGINT},
+      </if>
+      <if test="sysMemoName != null" >
+        sys_memo_name = #{sysMemoName,jdbcType=VARCHAR},
+      </if>
+      <if test="sysMemoAnothername != null" >
+        sys_memo_anothername = #{sysMemoAnothername,jdbcType=VARCHAR},
+      </if>
+      <if test="sysMemoUrl != null" >
+        sys_memo_url = #{sysMemoUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="sysMemoRemark != null" >
+        sys_memo_remark = #{sysMemoRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="gmtCreate != null" >
+        gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="gmtModified != null" >
+        gmt_modified = #{gmtModified,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where sys_memo_id = #{sysMemoId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.nlzh.core.pojo.SysMemo" >
+    update sys_memo
+    set sys_template_id = #{sysTemplateId,jdbcType=BIGINT},
+      sys_memo_name = #{sysMemoName,jdbcType=VARCHAR},
+      sys_memo_anothername = #{sysMemoAnothername,jdbcType=VARCHAR},
+      sys_memo_url = #{sysMemoUrl,jdbcType=VARCHAR},
+      sys_memo_remark = #{sysMemoRemark,jdbcType=VARCHAR},
+      gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
+      gmt_modified = #{gmtModified,jdbcType=TIMESTAMP}
+    where sys_memo_id = #{sysMemoId,jdbcType=BIGINT}
+  </update>
+  
+  <select id="listAll" resultMap="BaseResultMap"  >
+    select 
+    <include refid="Base_Column_List" />
+    from sys_memo
+  </select>
+  
+  <select id="selectBySysmemoanothername" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from sys_memo
+    where sys_memo_anothername = #{sysmemoanothername,jdbcType=VARCHAR}
+  </select>
+  
+  <resultMap id="BaseRelationResultMap" type="com.nlzh.core.pojo.SysMemo" >
+    <id column="sys_memo_id" property="sysMemoId" jdbcType="BIGINT" />
+    <result column="sys_template_id" property="sysTemplateId" jdbcType="BIGINT" />
+    <result column="sys_memo_name" property="sysMemoName" jdbcType="VARCHAR" />
+    <result column="sys_memo_anothername" property="sysMemoAnothername" jdbcType="VARCHAR" />
+    <result column="sys_memo_url" property="sysMemoUrl" jdbcType="VARCHAR" />
+    <result column="sys_memo_remark" property="sysMemoRemark" jdbcType="VARCHAR" />
+    <result column="gmt_create" property="gmtCreate" jdbcType="TIMESTAMP" />
+    <result column="gmt_modified" property="gmtModified" jdbcType="TIMESTAMP" />
+    <association property="sysTemplate" javaType="com.nlzh.core.pojo.SysTemplate" >
+    	 <id column="sys_template_id" property="sysTemplateId" jdbcType="BIGINT" />
+	    <result column="sys_template_name" property="sysTemplateName" jdbcType="VARCHAR" />
+	    <result column="sys_template_remark" property="sysTemplateRemark" jdbcType="VARCHAR" />
+	    <result column="gmt_create" property="gmtCreate" jdbcType="TIMESTAMP" />
+	    <result column="gmt_modified" property="gmtModified" jdbcType="TIMESTAMP" />
+    </association>
+  </resultMap>
+  
+  <sql id="Base_Relation_Column_List" >
+	    sys_template.sys_template_id,
+		sys_template.sys_template_name,
+		sys_template.sys_template_remark,
+		sys_template.gmt_create,
+		sys_template.gmt_modified,
+		sys_memo.sys_memo_id,
+		sys_memo.sys_template_id,
+		sys_memo.sys_memo_name,
+		sys_memo.sys_memo_anothername,
+		sys_memo.sys_memo_url,
+		sys_memo.sys_memo_remark,
+		sys_memo.gmt_create,
+		sys_memo.gmt_modified
+  </sql>
+  
+  <sql id="QueryVO">
+  	    1=1
+    	<if test="sysTemplateId != null">
+    		and sys_memo.sys_template_id = #{sysTemplateId,jdbcType=BIGINT}
+    	</if>
+    	<if test="sysMemoName != null">
+    		and sys_memo.sys_memo_name = #{sysMemoName,jdbcType=VARCHAR}
+    	</if>
+    	<if test="sysMemoAnothername != null">
+    		and sys_memo.sys_memo_anothername = #{sysMemoAnothername,jdbcType=VARCHAR}
+    	</if>
+  </sql>
+  
+  <sql id="Limit">
+  		<if test="startIndex != null and pageSize != null">
+            limit ${startIndex},${pageSize}
+    	</if>
+  </sql>
+  
+  <select id="selectRelationBySysmemoanothername" resultMap="BaseRelationResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Relation_Column_List" />
+    from sys_memo 
+    	left join sys_template on sys_memo.sys_template_id = sys_template.sys_template_id
+    where 
+    	sys_memo.sys_memo_anothername = #{sysmemoanothername,jdbcType=VARCHAR}
+  </select>
+  
+  <select id="listByQueryVO" resultMap="BaseResultMap" parameterType="com.nlzh.core.query.SysMemoQuery" >
+    select 
+    	<include refid="Base_Column_List" />
+    from sys_memo 
+    where 
+    	<include refid="QueryVO" />
+    	<include refid="Limit" />
+  </select>
+  
+  <select id="countByQueryVO" resultType="java.lang.Long" parameterType="com.nlzh.core.query.SysMemoQuery" >
+    select 
+    	count(*)
+    from sys_memo 
+    where 
+    	<include refid="QueryVO" />
+  </select>
+  
+</mapper>
